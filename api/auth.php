@@ -4,13 +4,6 @@
  * Gunaso REST API – Authentication Middleware
  * बेसीशहर नगरपालिका
  * ============================================================
- * File   : api/auth.php
- * Purpose: Validates API key on every inbound request.
- *          Supports two header formats:
- *            Authorization: Bearer <key>
- *            X-API-KEY: <key>
- *          Enforces per-key rate limiting (sliding 1-min window).
- * ============================================================
  */
 
 declare(strict_types=1);
@@ -22,174 +15,164 @@ if (!defined('API_ENTRY')) {
 
 class ApiAuth
 {
-    /** Holds the validated key row after authenticate() succeeds */
     private static ?array $currentKey = null;
 
-    // ── Public API ────────────────────────────────────────────
-
-    /**
-     * Authenticate the current request.
-     * Sends a 401 JSON response and exits on failure.
-     * On success, returns the api_keys row array.
-     *
-     * @return array  Validated api_keys row
-     */
     public static function authenticate(): array
     {
-        // 1. Extract raw key from request headers
+        // Step 1 - Extract key from headers
         $rawKey = self::extractKey();
-
         if ($rawKey === null) {
             self::deny('API key missing. Provide it via Authorization: Bearer <key> or X-API-KEY header.');
         }
 
-        // 2. Validate format (64-char hex OR arbitrary string up to 128 chars)
-        if (!self::isValidKeyFormat($rawKey)) {
+        // Step 2 - Basic format check
+        $len = strlen($rawKey);
+        if ($len < 6 || $len > 128) {
             self::deny('Invalid API key format.');
         }
 
-        // 3. Look up the key in the database
-        $keyRow = self::lookupKey($rawKey);
+        // Step 3 - Find key ID using SHA2 match (separate query to avoid column conflict)
+        $keyId = self::findKeyId($rawKey);
+        if ($keyId === null) {
+            self::deny('Unauthorized Access');
+        }
 
+        // Step 4 - Fetch full row by ID (clean, no SHA2 expression in same query)
+        $keyRow = self::fetchKeyById($keyId);
         if ($keyRow === null) {
             self::deny('Unauthorized Access');
         }
 
-        // 4. Check key status
-        if ($keyRow['status'] !== 'active') {
-            self::deny('API key is inactive or revoked.');
+        // Step 5 - Check status
+        if ((string)$keyRow['status'] !== 'active') {
+            self::deny('API key is inactive or revoked. Status: ' . $keyRow['status']);
         }
 
-        // 5. IP whitelist check (if configured)
+        // Step 6 - IP whitelist check
         if (!empty($keyRow['allowed_ips'])) {
-            self::checkIpWhitelist($keyRow['allowed_ips']);
+            self::checkIpWhitelist((string)$keyRow['allowed_ips']);
         }
 
-        // 6. Rate limiting
-        self::checkRateLimit((int) $keyRow['id'], (int) $keyRow['rate_limit']);
+        // Step 7 - Rate limiting
+        self::checkRateLimit((int)$keyRow['id'], (int)$keyRow['rate_limit']);
 
-        // 7. Update last_used_at timestamp (fire-and-forget)
-        self::touchLastUsed((int) $keyRow['id']);
+        // Step 8 - Update last_used_at
+        self::touchLastUsed((int)$keyRow['id']);
 
         self::$currentKey = $keyRow;
         return $keyRow;
     }
 
-    /**
-     * Return the current authenticated key row (after authenticate()).
-     */
     public static function currentKey(): ?array
     {
         return self::$currentKey;
     }
 
-    /**
-     * Return the current key ID (or null if not authenticated yet).
-     */
     public static function currentKeyId(): ?int
     {
-        return self::$currentKey ? (int) self::$currentKey['id'] : null;
+        return self::$currentKey ? (int)self::$currentKey['id'] : null;
     }
 
-    // ── Private Helpers ───────────────────────────────────────
+    // ── Extract key from request headers ─────────────────────
 
-    /**
-     * Extract the raw API key string from request headers.
-     * Checks Authorization: Bearer <token>  and  X-API-KEY: <token>.
-     */
     private static function extractKey(): ?string
     {
-        // Priority 1 – Authorization: Bearer <key>
+        // Check Authorization: Bearer <key>
         $authHeader = $_SERVER['HTTP_AUTHORIZATION']
             ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION']
-            ?? getallheaders()['Authorization']
             ?? null;
+
+        if ($authHeader === null && function_exists('getallheaders')) {
+            $allHeaders = getallheaders();
+            $authHeader = $allHeaders['Authorization'] ?? $allHeaders['authorization'] ?? null;
+        }
 
         if ($authHeader !== null && stripos($authHeader, 'bearer ') === 0) {
             $key = trim(substr($authHeader, 7));
             return $key !== '' ? $key : null;
         }
 
-        // Priority 2 – X-API-KEY: <key>
-        $xApiKey = $_SERVER['HTTP_X_API_KEY']
-            ?? getallheaders()['X-Api-Key']
-            ?? getallheaders()['X-API-KEY']
-            ?? null;
+        // Check X-API-KEY header
+        $xKey = $_SERVER['HTTP_X_API_KEY'] ?? null;
 
-        if ($xApiKey !== null) {
-            $key = trim($xApiKey);
+        if ($xKey === null && function_exists('getallheaders')) {
+            $allHeaders = getallheaders();
+            $xKey = $allHeaders['X-API-KEY']
+                 ?? $allHeaders['X-Api-Key']
+                 ?? $allHeaders['x-api-key']
+                 ?? null;
+        }
+
+        if ($xKey !== null) {
+            $key = trim($xKey);
             return $key !== '' ? $key : null;
         }
 
         return null;
     }
 
-    /**
-     * Basic format validation:
-     * - Must be 6–128 printable ASCII characters
-     * - No whitespace allowed
-     */
-    private static function isValidKeyFormat(string $key): bool
-    {
-        $len = strlen($key);
-        if ($len < 6 || $len > 128) {
-            return false;
-        }
-        // Allow alphanumeric and common special characters
-        return (bool) preg_match('/^[A-Za-z0-9@#!_\-\.]+$/', $key);
-    }
+    // ── Two-step DB lookup to avoid column name conflict ──────
 
     /**
-     * Fetch the api_keys row matching the given key.
-     * Uses MySQL SHA2() to hash so it always matches what was stored via phpMyAdmin.
+     * Step 1: Get the ID of the row matching the key hash.
+     * Only selects `id` — no other columns that could conflict.
      */
-    private static function lookupKey(string $rawKey): ?array
+    private static function findKeyId(string $rawKey): ?int
     {
         try {
-            $pdo = ApiDatabase::getInstance();
-
-            // Use MySQL SHA2() directly — guarantees identical hashing to phpMyAdmin
+            $pdo  = ApiDatabase::getInstance();
             $stmt = $pdo->prepare(
-                "SELECT id, client_name, api_key, status, allowed_ips, rate_limit
-                 FROM api_keys
-                 WHERE api_key = SHA2(:key, 256)
-                   AND status = 'active'
-                 LIMIT 1"
+                "SELECT id FROM api_keys WHERE api_key = SHA2(:key, 256) LIMIT 1"
             );
             $stmt->execute([':key' => $rawKey]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            return $row ?: null;
+            $id = $stmt->fetchColumn();
+            return ($id !== false) ? (int)$id : null;
         } catch (Exception $e) {
-            self::logError('lookupKey: ' . $e->getMessage());
-            self::deny('Service temporarily unavailable. Please try again later.');
+            self::logError('findKeyId: ' . $e->getMessage());
+            self::deny('Service temporarily unavailable.');
         }
     }
 
     /**
-     * Enforce per-key sliding-window rate limiting.
-     * Uses the api_rate_limit table for persistent counters.
+     * Step 2: Fetch the full row by ID.
+     * Clean query — no SHA2 expression, no column name conflict.
      */
+    private static function fetchKeyById(int $id): ?array
+    {
+        try {
+            $pdo  = ApiDatabase::getInstance();
+            $stmt = $pdo->prepare(
+                "SELECT id, client_name, status, allowed_ips, rate_limit
+                 FROM api_keys
+                 WHERE id = :id
+                 LIMIT 1"
+            );
+            $stmt->execute([':id' => $id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ?: null;
+        } catch (Exception $e) {
+            self::logError('fetchKeyById: ' . $e->getMessage());
+            self::deny('Service temporarily unavailable.');
+        }
+    }
+
+    // ── Rate limiting ─────────────────────────────────────────
+
     private static function checkRateLimit(int $keyId, int $limit): void
     {
         try {
             $pdo = ApiDatabase::getInstance();
             $now = date('Y-m-d H:i:s');
 
-            // Fetch current window row
-            $stmt = $pdo->prepare(
-                "SELECT window_start, hit_count
-                 FROM api_rate_limit
-                 WHERE api_key_id = :id
-                 FOR UPDATE"
-            );
-
             $pdo->beginTransaction();
+            $stmt = $pdo->prepare(
+                "SELECT window_start, hit_count FROM api_rate_limit
+                 WHERE api_key_id = :id FOR UPDATE"
+            );
             $stmt->execute([':id' => $keyId]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row === false) {
-                // First request from this key — insert new window
                 $ins = $pdo->prepare(
                     "INSERT INTO api_rate_limit (api_key_id, window_start, hit_count)
                      VALUES (:id, :now, 1)"
@@ -199,11 +182,9 @@ class ApiAuth
                 return;
             }
 
-            $windowStart = strtotime($row['window_start']);
-            $elapsed     = time() - $windowStart;
+            $elapsed = time() - strtotime($row['window_start']);
 
             if ($elapsed >= API_RATE_WINDOW_SEC) {
-                // Window expired – reset counter
                 $upd = $pdo->prepare(
                     "UPDATE api_rate_limit
                      SET window_start = :now, hit_count = 1
@@ -214,33 +195,27 @@ class ApiAuth
                 return;
             }
 
-            // Still within window
-            if ((int) $row['hit_count'] >= $limit) {
+            if ((int)$row['hit_count'] >= $limit) {
                 $pdo->commit();
                 $retryAfter = API_RATE_WINDOW_SEC - $elapsed;
                 header('Retry-After: ' . $retryAfter);
                 http_response_code(429);
                 echo json_encode([
                     'success'     => false,
-                    'message'     => 'Rate limit exceeded. Maximum ' . $limit
-                                     . ' requests per minute. Retry after '
-                                     . $retryAfter . ' seconds.',
+                    'message'     => 'Rate limit exceeded. Retry after ' . $retryAfter . ' seconds.',
                     'retry_after' => $retryAfter,
                 ]);
                 exit;
             }
 
-            // Increment counter
             $upd = $pdo->prepare(
-                "UPDATE api_rate_limit
-                 SET hit_count = hit_count + 1
+                "UPDATE api_rate_limit SET hit_count = hit_count + 1
                  WHERE api_key_id = :id"
             );
             $upd->execute([':id' => $keyId]);
             $pdo->commit();
 
         } catch (Exception $e) {
-            // If rate-limit table is unavailable, log and allow (fail open)
             if (isset($pdo) && $pdo->inTransaction()) {
                 $pdo->rollBack();
             }
@@ -248,63 +223,45 @@ class ApiAuth
         }
     }
 
-    /**
-     * Check that the request IP is in the key's allowed_ips list.
-     */
+    // ── IP whitelist ──────────────────────────────────────────
+
     private static function checkIpWhitelist(string $allowedIps): void
     {
         $clientIp  = self::getClientIp();
         $whitelist = array_map('trim', explode(',', $allowedIps));
-
         if (!in_array($clientIp, $whitelist, true)) {
-            self::deny('Access denied: your IP address (' . $clientIp . ') is not whitelisted for this key.');
+            self::deny('Access denied: IP ' . $clientIp . ' is not whitelisted.');
         }
     }
 
-    /**
-     * Update the last_used_at timestamp for the given key.
-     */
+    // ── Update last_used_at ───────────────────────────────────
+
     private static function touchLastUsed(int $keyId): void
     {
         try {
             $pdo  = ApiDatabase::getInstance();
-            $stmt = $pdo->prepare(
-                "UPDATE api_keys SET last_used_at = NOW() WHERE id = :id"
-            );
+            $stmt = $pdo->prepare("UPDATE api_keys SET last_used_at = NOW() WHERE id = :id");
             $stmt->execute([':id' => $keyId]);
         } catch (Exception $e) {
             self::logError('touchLastUsed: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Get the real client IP, respecting common proxy headers.
-     */
+    // ── Helpers ───────────────────────────────────────────────
+
     public static function getClientIp(): string
     {
-        $headers = [
-            'HTTP_CF_CONNECTING_IP',   // Cloudflare
-            'HTTP_X_REAL_IP',
-            'HTTP_X_FORWARDED_FOR',
-            'REMOTE_ADDR',
-        ];
-
-        foreach ($headers as $header) {
-            if (!empty($_SERVER[$header])) {
-                // X-Forwarded-For may contain a chain; take the first
-                $ip = trim(explode(',', $_SERVER[$header])[0]);
+        foreach (['HTTP_CF_CONNECTING_IP','HTTP_X_REAL_IP','HTTP_X_FORWARDED_FOR','REMOTE_ADDR'] as $h) {
+            if (!empty($_SERVER[$h])) {
+                $ip = trim(explode(',', $_SERVER[$h])[0]);
                 if (filter_var($ip, FILTER_VALIDATE_IP)) {
                     return $ip;
                 }
             }
         }
-
         return '0.0.0.0';
     }
 
-    /**
-     * Write an error entry to the flat-file error log.
-     */
     private static function logError(string $msg): void
     {
         $entry = sprintf("[%s] AUTH_ERROR: %s | IP: %s\n",
@@ -312,19 +269,10 @@ class ApiAuth
         @error_log($entry, 3, API_ERROR_LOG_FILE);
     }
 
-    /**
-     * Emit a 401 JSON response and terminate execution.
-     *
-     * @param  string $message  Public-safe error message
-     * @return never
-     */
     private static function deny(string $message = 'Unauthorized Access'): void
     {
         http_response_code(401);
-        echo json_encode([
-            'success' => false,
-            'message' => $message,
-        ]);
+        echo json_encode(['success' => false, 'message' => $message]);
         exit;
     }
 }
