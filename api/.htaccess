@@ -1,0 +1,56 @@
+# ============================================================
+# Gunaso REST API – Apache Configuration
+# बेसीशहर नगरपालिका
+# ============================================================
+
+Options -Indexes -ExecCGI
+ServerSignature Off
+
+# ── Block direct access to core files ────────────────────────
+<FilesMatch "^(config|database|auth|logger)\.php$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# ── Block access to SQL schema file ──────────────────────────
+<FilesMatch "\.sql$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# ── Block access to log directory ────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block access to /api/logs/
+    RewriteRule ^logs/ - [F,L]
+
+    # Force HTTPS – uncomment when SSL cert is ready
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ── Security headers ──────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "no-referrer"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    # Remove sensitive server info
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# ── PHP settings for this directory ──────────────────────────
+<IfModule mod_php.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value error_log "logs/php_error.log"
+</IfModule>
+
+# ── Deny access to backup files ───────────────────────────────
+<FilesMatch "\.(bak|backup|old|tmp|log|txt)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
