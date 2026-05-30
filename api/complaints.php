@@ -217,7 +217,7 @@ try {
     $totalRecords = (int) $stmtCount->fetchColumn();
     $totalPages   = (int) ceil($totalRecords / $limit);
 
-    // Data query
+    // Data query — LIMIT/OFFSET injected as integers after validation
     $offset  = ($page - 1) * $limit;
     $dataSQL = "SELECT
                     c.id,
@@ -245,15 +245,16 @@ try {
                 ORDER BY c.created_at DESC
                 LIMIT :limit OFFSET :offset";
 
+    // With EMULATE_PREPARES=true, inject LIMIT/OFFSET directly as integers (safe — already validated)
+    $dataSQL  = str_replace(':limit',  (int) $limit,  $dataSQL);
+    $dataSQL  = str_replace(':offset', (int) $offset, $dataSQL);
+
     $stmtData = $pdo->prepare($dataSQL);
 
     // Bind named params from filters
     foreach ($params as $key => $val) {
         $stmtData->bindValue($key, $val, PDO::PARAM_STR);
     }
-    // Bind pagination (must use PARAM_INT for LIMIT/OFFSET)
-    $stmtData->bindValue(':limit',  $limit,  PDO::PARAM_INT);
-    $stmtData->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmtData->execute();
 
     $complaints = $stmtData->fetchAll(PDO::FETCH_ASSOC);

@@ -135,14 +135,13 @@ try {
             LEFT JOIN users           u ON c.assigned_to = u.id
             $whereSQL
             ORDER BY c.created_at DESC
-            LIMIT :limit";
+            LIMIT " . (int)$limit;
 
     $stmt = $pdo->prepare($sql);
 
     foreach ($params as $key => $val) {
         $stmt->bindValue($key, $val, PDO::PARAM_STR);
     }
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->execute();
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
