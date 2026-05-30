@@ -121,10 +121,14 @@ class ApiAuth
     {
         try {
             $pdo  = ApiDatabase::getInstance();
+
+            // Use PHP hash() — avoids MySQL binary/hex SHA2 inconsistency on shared hosting
+            $hash = hash('sha256', $rawKey); // always returns lowercase 64-char hex string
+
             $stmt = $pdo->prepare(
-                "SELECT id FROM api_keys WHERE api_key = SHA2(:key, 256) LIMIT 1"
+                "SELECT id FROM api_keys WHERE api_key = :hash LIMIT 1"
             );
-            $stmt->execute([':key' => $rawKey]);
+            $stmt->execute([':hash' => $hash]);
             $id = $stmt->fetchColumn();
             return ($id !== false) ? (int)$id : null;
         } catch (Exception $e) {
