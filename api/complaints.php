@@ -89,7 +89,7 @@ $keyId  = (int) $keyRow['id'];
 /**
  * Return a sanitized string from $_GET or null.
  */
-function getStr(string $key, int $maxLen = 100): ?string
+function apiGetStr(string $key, int $maxLen = 100): ?string
 {
     if (!isset($_GET[$key]) || $_GET[$key] === '') {
         return null;
@@ -101,7 +101,7 @@ function getStr(string $key, int $maxLen = 100): ?string
 /**
  * Return a positive integer from $_GET or the given default.
  */
-function getInt(string $key, int $default = 1, int $min = 1, int $max = PHP_INT_MAX): int
+function apiGetInt(string $key, int $default = 1, int $min = 1, int $max = PHP_INT_MAX): int
 {
     if (!isset($_GET[$key])) {
         return $default;
@@ -116,9 +116,9 @@ function getInt(string $key, int $default = 1, int $min = 1, int $max = PHP_INT_
 /**
  * Return a validated Y-m-d date string or null.
  */
-function getDate(string $key): ?string
+function apiGetDate(string $key): ?string
 {
-    $raw = getStr($key, 10);
+    $raw = apiGetStr($key, 10);
     if ($raw === null) {
         return null;
     }
@@ -127,24 +127,24 @@ function getDate(string $key): ?string
 }
 
 // ── Parse & validate query parameters ────────────────────────
-$page  = getInt('page',  1,  1, 10000);
-$limit = getInt('limit', API_DEFAULT_LIMIT, 1, API_MAX_LIMIT);
+$page  = apiGetInt('page',  1,  1, 10000);
+$limit = apiGetInt('limit', API_DEFAULT_LIMIT, 1, API_MAX_LIMIT);
 
 $statusAllowed = ['pending', 'in-progress', 'resolved', 'rejected'];
-$statusRaw     = getStr('status', 20);
+$statusRaw     = apiGetStr('status', 20);
 $status        = ($statusRaw !== null && in_array($statusRaw, $statusAllowed, true))
                  ? $statusRaw : null;
 
 $priorityAllowed = ['low', 'medium', 'high', 'urgent'];
-$priorityRaw     = getStr('priority', 10);
+$priorityRaw     = apiGetStr('priority', 10);
 $priority        = ($priorityRaw !== null && in_array($priorityRaw, $priorityAllowed, true))
                    ? $priorityRaw : null;
 
-$category   = getStr('category',   100);
-$department = getStr('department', 100);
-$search     = getStr('search',     150);
-$fromDate   = getDate('from_date');
-$toDate     = getDate('to_date');
+$category   = apiGetStr('category',   100);
+$department = apiGetStr('department', 100);
+$search     = apiGetStr('search',     150);
+$fromDate   = apiGetDate('from_date');
+$toDate     = apiGetDate('to_date');
 
 // Date range sanity: from_date must not be after to_date
 if ($fromDate !== null && $toDate !== null && $fromDate > $toDate) {
