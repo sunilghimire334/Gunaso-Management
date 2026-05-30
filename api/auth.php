@@ -126,42 +126,42 @@ class ApiAuth
 
     /**
      * Basic format validation:
-     * - Must be 32–128 printable ASCII characters
+     * - Must be 6–128 printable ASCII characters
      * - No whitespace allowed
      */
     private static function isValidKeyFormat(string $key): bool
     {
         $len = strlen($key);
-        if ($len < 32 || $len > 128) {
+        if ($len < 6 || $len > 128) {
             return false;
         }
-        // Only printable, non-whitespace characters
-        return (bool) preg_match('/^[!-~]+$/', $key);
+        // Allow alphanumeric and common special characters
+        return (bool) preg_match('/^[A-Za-z0-9@#!_\-\.]+$/', $key);
     }
 
     /**
      * Fetch the api_keys row matching the given key.
-     * The key is stored as SHA-256 hex, so we hash the input.
+     * Uses MySQL SHA2() to hash so it always matches what was stored via phpMyAdmin.
      */
     private static function lookupKey(string $rawKey): ?array
     {
         try {
-            $pdo  = ApiDatabase::getInstance();
-            $hash = hash('sha256', $rawKey);
+            $pdo = ApiDatabase::getInstance();
 
+            // Use MySQL SHA2() directly — guarantees identical hashing to phpMyAdmin
             $stmt = $pdo->prepare(
                 "SELECT id, client_name, api_key, status, allowed_ips, rate_limit
                  FROM api_keys
-                 WHERE api_key = :key
+                 WHERE api_key = SHA2(:key, 256)
+                   AND status = 'active'
                  LIMIT 1"
             );
-            $stmt->execute([':key' => $hash]);
+            $stmt->execute([':key' => $rawKey]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $row ?: null;
         } catch (Exception $e) {
             self::logError('lookupKey: ' . $e->getMessage());
-            // Fail safe – deny access if DB is unavailable
             self::deny('Service temporarily unavailable. Please try again later.');
         }
     }
