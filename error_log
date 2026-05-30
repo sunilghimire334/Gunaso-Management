@@ -1,0 +1,163 @@
+[10-Oct-2025 13:27:54 Asia/Kathmandu] Aakash SMS Error - HTTP 406: <html><head><title>Error 406 - Not Acceptable</title><head><body><h1>Error 406 - Not Acceptable</h1><p>Generally a 406 error is caused because a request has been blocked by Mod Security. If you believe that your request has been blocked by mistake please contact the web site owner.</p></body></html>
+[10-Oct-2025 13:28:41 Asia/Kathmandu] Aakash SMS Error - HTTP 406: <html><head><title>Error 406 - Not Acceptable</title><head><body><h1>Error 406 - Not Acceptable</h1><p>Generally a 406 error is caused because a request has been blocked by Mod Security. If you believe that your request has been blocked by mistake please contact the web site owner.</p></body></html>
+[10-Oct-2025 13:29:25 Asia/Kathmandu] Aakash SMS Error - HTTP 406: <html><head><title>Error 406 - Not Acceptable</title><head><body><h1>Error 406 - Not Acceptable</h1><p>Generally a 406 error is caused because a request has been blocked by Mod Security. If you believe that your request has been blocked by mistake please contact the web site owner.</p></body></html>
+[10-Oct-2025 13:29:29 Asia/Kathmandu] Aakash SMS Error - HTTP 406: <html><head><title>Error 406 - Not Acceptable</title><head><body><h1>Error 406 - Not Acceptable</h1><p>Generally a 406 error is caused because a request has been blocked by Mod Security. If you believe that your request has been blocked by mistake please contact the web site owner.</p></body></html>
+[10-Oct-2025 13:30:18 Asia/Kathmandu] Aakash SMS Error - HTTP 406: <html><head><title>Error 406 - Not Acceptable</title><head><body><h1>Error 406 - Not Acceptable</h1><p>Generally a 406 error is caused because a request has been blocked by Mod Security. If you believe that your request has been blocked by mistake please contact the web site owner.</p></body></html>
+[10-Oct-2025 13:36:28 Asia/Kathmandu] Aakash SMS CURL Error (28): Failed to connect to api.aakashsms.com port 443: Connection timed out
+[10-Oct-2025 13:36:28 Asia/Kathmandu] Aakash SMS Error - HTTP 0: 
+[11-Oct-2025 17:46:01 Asia/Kathmandu] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function send_email_notification(), 3 passed in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 42 and exactly 4 expected in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php:172
+Stack trace:
+#0 /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php(42): send_email_notification('BESI-25-1011-00...', 'sunilghimire334...', 'pending')
+#1 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 172
+[11-Oct-2025 12:29:44 UTC] PHP Parse error:  syntax error, unexpected token "use" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 183
+[11-Oct-2025 12:29:48 UTC] PHP Parse error:  syntax error, unexpected token "use" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 183
+[11-Oct-2025 12:29:50 UTC] PHP Parse error:  syntax error, unexpected token "use" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 183
+[11-Oct-2025 12:33:35 UTC] PHP Parse error:  syntax error, unexpected token "use" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 183
+[11-Oct-2025 12:33:37 UTC] PHP Parse error:  syntax error, unexpected token "use" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 183
+[11-Oct-2025 18:22:35 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Class "PHPMailer" not found in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php:193
+Stack trace:
+#0 /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php(327): send_email_phpmailer('sunilghimire334...', 'Sunil Ghimire', '\xE0\xA4\x97\xE0\xA5\x81\xE0\xA4\xA8\xE0\xA4\xBE\xE0\xA4\xB8...', '\r\n        <div ...')
+#1 /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php(42): notify_complaint_registered('BESI-25-1011-00...', 'Sunil Ghimire', 'sunilghimire334...', '9862382481', 'test')
+#2 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 193
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "name" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 9
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "address" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 10
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "contact" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 11
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "branch_id" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 13
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "type_id" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 14
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "subject" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 15
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Warning:  Undefined array key "description" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 16
+[12-Oct-2025 10:56:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "name" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 9
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "address" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 10
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "contact" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 11
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "branch_id" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 13
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "type_id" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 14
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "subject" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 15
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Warning:  Undefined array key "description" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 16
+[12-Oct-2025 11:40:31 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 52
+[12-Oct-2025 15:16:17 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[13-Oct-2025 10:22:12 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[13-Oct-2025 10:23:53 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[13-Oct-2025 10:56:13 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[13-Oct-2025 10:56:29 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[13-Oct-2025 10:56:57 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[13-Oct-2025 10:57:09 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[24-Oct-2025 18:11:06 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Undefined constant "SMS_FROM" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/debug_sms.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/debug_sms.php on line 18
+[24-Oct-2025 22:27:56 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Call to undefined function cacheMetaTags() in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php on line 60
+[24-Oct-2025 22:28:04 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Call to undefined function cacheMetaTags() in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php on line 60
+[24-Oct-2025 22:28:15 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Call to undefined function cacheMetaTags() in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php on line 60
+[26-Oct-2025 20:19:14 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Call to undefined function cacheMetaTags() in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php on line 60
+[26-Oct-2025 20:19:19 Asia/Kathmandu] PHP Fatal error:  Uncaught Error: Call to undefined function cacheMetaTags() in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/index.php on line 60
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "name" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 48
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 53
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "address" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 49
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 53
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "contact" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 50
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 53
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "branch_id" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 52
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "type_id" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 53
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "subject" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 54
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 53
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Warning:  Undefined array key "description" in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/submit.php on line 55
+[29-Nov-2025 15:11:59 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.sanjeevaniitsolution.com.np/config.php on line 53
+[11-Dec-2025 18:02:07 Asia/Kathmandu] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'techcraf_besigunaso.complaints' doesn't exist in /home/techcraf/gunaso.besishaharmun.gov.np/index.php:13
+Stack trace:
+#0 /home/techcraf/gunaso.besishaharmun.gov.np/index.php(13): mysqli->query('SELECT status, ...')
+#1 {main}
+  thrown in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 13
+[11-Dec-2025 18:02:09 Asia/Kathmandu] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'techcraf_besigunaso.complaints' doesn't exist in /home/techcraf/gunaso.besishaharmun.gov.np/index.php:13
+Stack trace:
+#0 /home/techcraf/gunaso.besishaharmun.gov.np/index.php(13): mysqli->query('SELECT status, ...')
+#1 {main}
+  thrown in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 13
+[11-Dec-2025 18:52:53 Asia/Kathmandu] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'techcraf_besigunaso.complaints' doesn't exist in /home/techcraf/gunaso.besishaharmun.gov.np/index.php:13
+Stack trace:
+#0 /home/techcraf/gunaso.besishaharmun.gov.np/index.php(13): mysqli->query('SELECT status, ...')
+#1 {main}
+  thrown in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 13
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_title in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 70
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_title in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 71
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_description in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 72
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_keywords in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 73
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 86
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_title in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 87
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_description in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 88
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $og_image in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 89
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 99
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_title in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 100
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $page_description in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 101
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $og_image in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 102
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 116
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 119
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 120
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 121
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 143
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $og_image in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 144
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $og_image in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 145
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 189
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 194
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 208
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 217
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 234
+[11-Dec-2025 19:59:02 Asia/Kathmandu] PHP Warning:  Undefined variable $site_url in /home/techcraf/gunaso.besishaharmun.gov.np/index.php on line 254
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "name" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 48
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "address" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 49
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "contact" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 50
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "branch_id" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 52
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "type_id" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 53
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "subject" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 54
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Warning:  Undefined array key "description" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 55
+[11-Dec-2025 20:14:36 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "name" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 48
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "address" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 49
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "contact" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 50
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "branch_id" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 52
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "type_id" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 53
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "subject" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 54
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Warning:  Undefined array key "description" in /home/techcraf/gunaso.besishaharmun.gov.np/submit.php on line 55
+[11-Dec-2025 20:16:16 Asia/Kathmandu] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/techcraf/gunaso.besishaharmun.gov.np/config.php on line 53
+[15-Dec-2025 18:33:53 Asia/Kathmandu] PHPMailer Error: SMTP Error: Could not authenticate.
+[15-Dec-2025 18:33:53 Asia/Kathmandu] Email notification failed for GUN-25-1215-001: Email failed: SMTP Error: Could not authenticate.
+[15-Dec-2025 18:52:03 Asia/Kathmandu] Aakash SMS v3 - Phone: 9862382481, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_176580402384298","mobile":"9779862382481","text":"Besishahar Mun: Tapaaiko gunaso darjaa bhayo. Tracking No: GUN-25-1215-003. Status herna: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":1,"network":"ntc","status":"queued","shortcode":"AT_Alert"}],"invalid":[]}}
+[15-Dec-2025 19:01:43 Asia/Kathmandu] Aakash SMS v3 - Phone: 9862382481, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_176580460347812","mobile":"9779862382481","text":"\u092c\u0947\u0938\u0940\u0936\u0939\u0930 \u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e: \u0924\u092a\u093e\u0908\u0915\u094b \u0917\u0941\u0928\u093e\u0938\u094b \u0938\u092b\u0932\u0924\u093e\u092a\u0941\u0930\u094d\u0935\u0915 \u0926\u0930\u094d\u0924\u093e \u092d\u092f\u094b\u0964 \u091f\u094d\u0930\u094d\u092f\u093e\u0915\u093f\u0919 \u0928\u0902\u0903 GUN-25-1215-004. Status \u0939\u0947\u0930\u094d\u0928: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":3,"network":"ntc","status":"queued","shortcode":"AT_Alert"}],"invalid":[]}}
+[08-Apr-2026 14:15:35 Asia/Kathmandu] Aakash SMS v3 - Phone: 9846165638, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_177563703517709","mobile":"9779846165638","text":"\u092c\u0947\u0938\u0940\u0936\u0939\u0930 \u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e: \u0924\u092a\u093e\u0908\u0915\u094b \u0917\u0941\u0928\u093e\u0938\u094b \u0938\u092b\u0932\u0924\u093e\u092a\u0941\u0930\u094d\u0935\u0915 \u0926\u0930\u094d\u0924\u093e \u092d\u092f\u094b\u0964 \u091f\u094d\u0930\u094d\u092f\u093e\u0915\u093f\u0919 \u0928\u0902\u0903 GUN-26-0408-001. Status \u0939\u0947\u0930\u094d\u0928: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":3,"network":"ntc","status":"queued","shortcode":"AT_Alert"}],"invalid":[]}}
+[16-May-2026 10:59:13 Asia/Kathmandu] Aakash SMS v3 - Phone: 9808151679, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_177890845324676","mobile":"9779808151679","text":"\u092c\u0947\u0938\u0940\u0936\u0939\u0930 \u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e: \u0924\u092a\u093e\u0908\u0915\u094b \u0917\u0941\u0928\u093e\u0938\u094b \u0938\u092b\u0932\u0924\u093e\u092a\u0941\u0930\u094d\u0935\u0915 \u0926\u0930\u094d\u0924\u093e \u092d\u092f\u094b\u0964 \u091f\u094d\u0930\u094d\u092f\u093e\u0915\u093f\u0919 \u0928\u0902\u0903 GUN-26-0516-001. Status \u0939\u0947\u0930\u094d\u0928: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":3,"network":"ncell","status":"queued","shortcode":"AT_ALERT"}],"invalid":[]}}
+[16-May-2026 11:00:04 Asia/Kathmandu] Aakash SMS v3 - Phone: 9808151679, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_177890850458329","mobile":"9779808151679","text":"\u092c\u0947\u0938\u0940\u0936\u0939\u0930 \u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e: \u0924\u092a\u093e\u0908\u0915\u094b \u0917\u0941\u0928\u093e\u0938\u094b \u0938\u092b\u0932\u0924\u093e\u092a\u0941\u0930\u094d\u0935\u0915 \u0926\u0930\u094d\u0924\u093e \u092d\u092f\u094b\u0964 \u091f\u094d\u0930\u094d\u092f\u093e\u0915\u093f\u0919 \u0928\u0902\u0903 GUN-26-0516-002. Status \u0939\u0947\u0930\u094d\u0928: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":3,"network":"ncell","status":"queued","shortcode":"AT_ALERT"}],"invalid":[]}}
+[17-May-2026 07:53:35 Asia/Kathmandu] Aakash SMS v3 - Phone: 9844446041, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_177898371558525","mobile":"9779844446041","text":"\u092c\u0947\u0938\u0940\u0936\u0939\u0930 \u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e: \u0924\u092a\u093e\u0908\u0915\u094b \u0917\u0941\u0928\u093e\u0938\u094b \u0938\u092b\u0932\u0924\u093e\u092a\u0941\u0930\u094d\u0935\u0915 \u0926\u0930\u094d\u0924\u093e \u092d\u092f\u094b\u0964 \u091f\u094d\u0930\u094d\u092f\u093e\u0915\u093f\u0919 \u0928\u0902\u0903 GUN-26-0517-001. Status \u0939\u0947\u0930\u094d\u0928: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":3,"network":"ntc","status":"queued","shortcode":"AT_Alert"}],"invalid":[]}}
+[24-May-2026 16:37:01 Asia/Kathmandu] Aakash SMS v3 - Phone: 9846098460, HTTP: 200, Response: {"error":false,"message":"1 messages has been queued for delivery.","data":{"valid":[{"id":"8751_177961992088173","mobile":"9779846098460","text":"\u092c\u0947\u0938\u0940\u0936\u0939\u0930 \u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e: \u0924\u092a\u093e\u0908\u0915\u094b \u0917\u0941\u0928\u093e\u0938\u094b \u0938\u092b\u0932\u0924\u093e\u092a\u0941\u0930\u094d\u0935\u0915 \u0926\u0930\u094d\u0924\u093e \u092d\u092f\u094b\u0964 \u091f\u094d\u0930\u094d\u092f\u093e\u0915\u093f\u0919 \u0928\u0902\u0903 GUN-26-0524-001. Status \u0939\u0947\u0930\u094d\u0928: https:\/\/gunaso.besishaharmun.gov.np\/track.php","credit":3,"network":"ntc","status":"queued","shortcode":"AT_Alert"}],"invalid":[]}}
