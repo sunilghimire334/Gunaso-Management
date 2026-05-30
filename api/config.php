@@ -26,7 +26,7 @@ define('API_DB_PASS',    'lamjungs123');
 define('API_DB_CHARSET', 'utf8mb4');
 
 // ── Site / API Identity ───────────────────────────────────────
-define('API_SITE_URL',  'https://gunaso.besisharmun.gov.np');
+define('API_SITE_URL',  'https://gunaso.besishaharmun.gov.np');
 define('API_VERSION',   'v1');
 define('API_BASE_PATH', '/api');
 
@@ -43,8 +43,8 @@ define('API_FORCE_HTTPS', true);
  * Use ['*'] to allow any origin (NOT recommended for production).
  */
 define('API_ALLOWED_ORIGINS', [
-    'https://gunaso.besisharmun.gov.np',
-    'https://dashboard.besisharmun.gov.np',   // Municipality main dashboard
+    'https://gunaso.besishaharmun.gov.np',
+    'https://dashboard.besishaharmun.gov.np',   // Municipality main dashboard
 ]);
 
 /**

@@ -1,6 +1,6 @@
 # Gunaso REST API – Complete Documentation
 **बेसीशहर नगरपालिका | Besi Shahar Municipality**
-**Version:** v1 | **Base URL:** `https://gunaso.besisharmun.gov.np/api`
+**Version:** v1 | **Base URL:** `https://gunaso.besishaharmun.gov.np/api`
 
 ---
 
@@ -65,7 +65,7 @@ Open `api/config.php` and update `API_ALLOWED_ORIGINS`:
 
 ```php
 define('API_ALLOWED_ORIGINS', [
-    'https://gunaso.besisharmun.gov.np',
+    'https://gunaso.besishaharmun.gov.np',
     'https://your-municipality-dashboard.gov.np',
 ]);
 ```
@@ -90,7 +90,7 @@ VALUES (
 ### Step 5 – Test the API
 ```bash
 curl -s -H "X-API-KEY: YourActualSecretKeyHere" \
-  https://gunaso.besisharmun.gov.np/api/dashboard.php
+  https://gunaso.besishaharmun.gov.np/api/dashboard.php
 ```
 
 Expected response: HTTP 200 with dashboard statistics JSON.
@@ -538,7 +538,7 @@ GET /api/complaint.php?id=99999
 ### Setup Environment Variables in Postman
 | Variable | Value |
 |----------|-------|
-| `base_url` | `https://gunaso.besisharmun.gov.np/api` |
+| `base_url` | `https://gunaso.besishaharmun.gov.np/api` |
 | `api_key` | `YourActualSecretKeyHere` |
 
 ### Add Authentication Header (applies to all requests)
